@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using Week7.Master.Core.BusinessLayer;
 using Week7.Master.Core.Entities;
-using Week7.Master.RepositoryMock;
+using Week7.Master.RepositoryEF.RepositoriesEF;
+//using Week7.Master.RepositoryMock;
 
 namespace Week7.Master
 {
     class Program
     {
-        private static readonly IBusinessLayer bl = new MainBusinessLayer(new RepositoryCorsiMock(), new RepositoryStudentiMock(), new RepositoryDocentiMock(), new RepositoryLezioniMock());
+        //private static readonly IBusinessLayer bl = new MainBusinessLayer(new RepositoryCorsiMock(), new RepositoryStudentiMock(), new RepositoryDocentiMock(), new RepositoryLezioniMock());
+        private static readonly IBusinessLayer bl = new MainBusinessLayer(new RepositoryCorsiEF(), new RepositoryStudentiEF(), new RepositoryDocentiEF(), new RepositoryLezioniEF());
         static void Main(string[] args)
         {
             bool continua = true;
