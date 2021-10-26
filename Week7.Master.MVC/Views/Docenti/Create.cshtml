@@ -1,0 +1,29 @@
+﻿@model DocenteViewModel
+<h1>Inserisci nuovo Docente</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Nome" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Nome" placeholder="Inserisci nome docente">
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Cognome" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Cognome" placeholder="Inserisci Cognome">
+        <span asp-validation-for="Cognome" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Email" placeholder="Inserisci email ">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Telefono" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Telefono" placeholder="Inserisci Telefono ">
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="Inserisci" class="btn btn-primary" />
+    <input type="reset" value="Reset" class="btn btn-danger" />
+    <a class="btn btn-primary" asp-action="Index" role="button">Back</a>
+</form>

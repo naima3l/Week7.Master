@@ -30,6 +30,13 @@ namespace Week7.Master.MVC.Controllers
 
         public IActionResult Prova()
         {
+            //ViewBag
+            ViewBag.Messaggio = "Benevenuti nella pagina. Questo è il messaggio contenuto nella view bag";
+            ViewBag.Valore = 123;
+
+            //ViewData
+            ViewData["MessaggioVD"] = "Benevenuti anche da parte del ViewData";
+
             return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

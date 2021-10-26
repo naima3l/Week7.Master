@@ -45,5 +45,67 @@ namespace Week7.Master.MVC.Controllers
 
             return View(corsoViewModel);
         }
+
+        //add
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(CorsoViewModel corsoViewModel)
+        {
+            if(ModelState.IsValid) //se la validazione è andata a buon fine, aggiungo alla lista e torno alla Index
+            {
+                BL.InserisciNuovoCorso(corsoViewModel.toCorso());
+                return RedirectToAction(nameof(Index)); //qui mi rimandi alla index
+            }
+            return View(corsoViewModel); //se non va a buon fine, ritorno 
+        }
+
+        //Edit
+        [HttpGet("Corsi/Edit/{code}")]
+        public IActionResult Edit(string code)
+        {
+            var corso = BL.GetAllCorsi().FirstOrDefault(c => c.CorsoCodice == code);
+            var corsoViewModel = corso.toCorsoViewModel();
+            return View(corsoViewModel);
+        }
+
+        [HttpPost("Corsi/Edit/{code}")]
+        public IActionResult Edit(CorsoViewModel corsoViewModel)
+        {
+            var corso = corsoViewModel.toCorso();
+
+            if (ModelState.IsValid) //se la validazione è andata a buon fine, aggiungo alla lista e torno alla Index
+            {
+                BL.ModificaCorso(corso.CorsoCodice,corso.Nome,corso.Descrizione);
+                return RedirectToAction(nameof(Index)); //qui mi rimandi alla index
+            }
+            return View(corsoViewModel); //se non va a buon fine, ritorno 
+        }
+
+        //Delete
+        public IActionResult Delete(string id)
+        {
+            var corso = BL.GetAllCorsi().FirstOrDefault(c => c.CorsoCodice == id);
+            var corsoViewModel = corso.toCorsoViewModel();
+            return View(corsoViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(CorsoViewModel corsoViewModel)
+        {
+            var corso = corsoViewModel.toCorso();
+
+            if (ModelState.IsValid) //se la validazione è andata a buon fine, aggiungo alla lista e torno alla Index
+            {
+                BL.DeleteByCode(corso.CorsoCodice);
+                return RedirectToAction(nameof(Index)); //qui mi rimandi alla index
+            }
+            return View(corsoViewModel); //se non va a buon fine, ritorno 
+        }
     }
 }

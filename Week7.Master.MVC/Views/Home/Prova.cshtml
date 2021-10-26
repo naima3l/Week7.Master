@@ -1,2 +1,19 @@
 ﻿<h1>Pagina di prova</h1>
 <p>Questa è soltanto una prova</p>
+
+
+@{ 
+    ViewBag.AltraVariabile = "Questa stringa è contenuta in AltraVariabile";
+}
+
+<partial name="_PezzoSempreUguale" />
+@*<partial name="_PezzoSempreUguale" model="Model"/>*@
+
+<h3>Dati della mia ViewBag</h3>
+<p>@ViewBag.Messaggio</p>
+<p>@ViewBag.Valore</p>
+<p>@ViewBag.AltraVariabile</p>
+
+<h3>Dati della mia ViewData</h3>
+<p>@ViewData["MessaggioVD"]</p>
+

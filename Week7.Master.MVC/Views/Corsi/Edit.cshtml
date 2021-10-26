@@ -1,0 +1,29 @@
+﻿@model CorsoViewModel
+<h1>Modifica Corso</h1>
+
+<form method="post">
+    @*<div class="mb-3">
+            <label asp-for="CorsoCodice" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="CorsoCodice" placeholder="@Model.CorsoCodice">
+            <span asp-validation-for="CorsoCodice" class="text-danger"></span>
+        </div>*@
+    <div class="mb-3" style="visibility: hidden;">
+        <label asp-for="CorsoCodice"></label>
+        <input asp-for="CorsoCodice" class="form-control" />
+        <span asp-validation-for="CorsoCodice" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Nome" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Nome" placeholder="Modifica nome corso">
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Descrizione" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Descrizione" placeholder="Modifica descrizione corso">
+        <span asp-validation-for="Descrizione" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="Inserisci" class="btn btn-primary" />
+    <input type="reset" value="Reset" class="btn btn-danger" />
+    <a class="btn btn-primary" asp-action="Index" role="button">Back</a>
+</form>

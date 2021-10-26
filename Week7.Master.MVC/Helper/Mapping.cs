@@ -43,6 +43,18 @@ namespace Week7.Master.MVC.Helper
             };
         }
 
+        public static Docente toDocente(this DocenteViewModel docenteViewModel)
+        {
+            return new Docente
+            {
+                Id = docenteViewModel.Id,
+                Nome = docenteViewModel.Nome,
+                Cognome = docenteViewModel.Cognome,
+                Email = docenteViewModel.Email,
+                Telefono = docenteViewModel.Telefono
+            };
+        }
+
         public static StudenteViewModel toStudenteViewModel(this Studente studente)
         {
             return new StudenteViewModel
@@ -53,6 +65,19 @@ namespace Week7.Master.MVC.Helper
                 DataNascita = studente.DataNascita,
                 Email = studente.Email,
                 TitoloStudio = studente.TitoloStudio
+            };
+        }
+
+        public static Studente toStudente(this StudenteViewModel studenteViewModel)
+        {
+            return new Studente
+            {
+                Id = studenteViewModel.Id,
+                Nome = studenteViewModel.Nome,
+                Cognome = studenteViewModel.Cognome,
+                DataNascita = studenteViewModel.DataNascita,
+                Email = studenteViewModel.Email,
+                TitoloStudio = studenteViewModel.TitoloStudio
             };
         }
 
