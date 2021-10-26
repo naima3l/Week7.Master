@@ -9,24 +9,37 @@ namespace Week7.Master.MVC.Helper
 {
     public static class Mapping
     {
+
         public static CorsoViewModel toCorsoViewModel(this Corso corso)
         {
+            List<StudenteViewModel> studentiViewModel = new List<StudenteViewModel>();
+            foreach (var item in corso.Studenti)
+            {
+                studentiViewModel.Add(item.toStudenteViewModel());
+            }
+
             return new CorsoViewModel
             {
                 CorsoCodice = corso.CorsoCodice,
                 Nome = corso.Nome,
-                Descrizione = corso.Descrizione
+                Descrizione = corso.Descrizione,
+                Studenti = studentiViewModel
             };
         }
 
         public static Corso toCorso(this CorsoViewModel corsoViewModel)
         {
+            List<Studente> studenti = new List<Studente>();
+            foreach (var item in corsoViewModel.Studenti)
+            {
+                studenti.Add(item?.toStudente());
+            }
             return new Corso
             {
                 CorsoCodice = corsoViewModel.CorsoCodice,
                 Nome = corsoViewModel.Nome,
-                Descrizione = corsoViewModel.Descrizione
-                //Studenti = null,
+                Descrizione = corsoViewModel.Descrizione,
+                Studenti = studenti,
                 //Lezioni = null
             };
         }
@@ -64,7 +77,8 @@ namespace Week7.Master.MVC.Helper
                 Cognome = studente.Cognome,
                 DataNascita = studente.DataNascita,
                 Email = studente.Email,
-                TitoloStudio = studente.TitoloStudio
+                TitoloStudio = studente.TitoloStudio,
+                CorsoCodice = studente.CorsoCodice
             };
         }
 
@@ -77,7 +91,8 @@ namespace Week7.Master.MVC.Helper
                 Cognome = studenteViewModel.Cognome,
                 DataNascita = studenteViewModel.DataNascita,
                 Email = studenteViewModel.Email,
-                TitoloStudio = studenteViewModel.TitoloStudio
+                TitoloStudio = studenteViewModel.TitoloStudio,
+                CorsoCodice = studenteViewModel.CorsoCodice
             };
         }
 

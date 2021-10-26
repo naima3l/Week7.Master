@@ -24,7 +24,7 @@ namespace Week7.Master.MVC.Controllers
 
             foreach (var item in studenti)
             {
-                studentiViewModel.Add(item.toStudenteViewModel());
+                studentiViewModel.Add(item?.toStudenteViewModel());
             }
             return View(studentiViewModel);
         }

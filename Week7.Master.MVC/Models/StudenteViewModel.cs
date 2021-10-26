@@ -13,5 +13,11 @@ namespace Week7.Master.MVC.Models
         public string Email { get; set; }
         public DateTime DataNascita { get; set; }
         public string TitoloStudio { get; set; }
+
+
+        //FK
+        public string CorsoCodice { get; set; }
+        //navigation property verso il corso
+        public CorsoViewModel Corso { get; set; }
     }
 }
