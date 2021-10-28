@@ -10,7 +10,7 @@ namespace Week7.Master
     class Program
     {
         //private static readonly IBusinessLayer bl = new MainBusinessLayer(new RepositoryCorsiMock(), new RepositoryStudentiMock(), new RepositoryDocentiMock(), new RepositoryLezioniMock());
-        private static readonly IBusinessLayer bl = new MainBusinessLayer(new RepositoryCorsiEF(), new RepositoryStudentiEF(), new RepositoryDocentiEF(), new RepositoryLezioniEF());
+        private static readonly IBusinessLayer bl = new MainBusinessLayer(new RepositoryCorsiEF(), new RepositoryStudentiEF(), new RepositoryDocentiEF(), new RepositoryLezioniEF(), new RepositoryUtentiEF());
         static void Main(string[] args)
         {
             bool continua = true;

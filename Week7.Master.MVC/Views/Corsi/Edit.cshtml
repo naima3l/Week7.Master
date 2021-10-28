@@ -7,9 +7,9 @@
             <input type="text" class="form-control" asp-for="CorsoCodice" placeholder="@Model.CorsoCodice">
             <span asp-validation-for="CorsoCodice" class="text-danger"></span>
         </div>*@
-    <div class="mb-3" style="visibility: hidden;">
+    <div class="mb-3">
         <label asp-for="CorsoCodice"></label>
-        <input asp-for="CorsoCodice" class="form-control" />
+        <input asp-for="CorsoCodice" class="form-control" readonly/>
         <span asp-validation-for="CorsoCodice" class="text-danger"></span>
     </div>
     <div class="mb-3">

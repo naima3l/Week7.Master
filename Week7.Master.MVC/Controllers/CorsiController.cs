@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,13 +48,14 @@ namespace Week7.Master.MVC.Controllers
         }
 
         //add
-
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator        
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator        
         [HttpPost]
         public IActionResult Create(CorsoViewModel corsoViewModel)
         {
@@ -66,6 +68,7 @@ namespace Week7.Master.MVC.Controllers
         }
 
         //Edit
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator        
         [HttpGet("Corsi/Edit/{code}")]
         public IActionResult Edit(string code)
         {
@@ -74,6 +77,7 @@ namespace Week7.Master.MVC.Controllers
             return View(corsoViewModel);
         }
 
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator        
         [HttpPost("Corsi/Edit/{code}")]
         public IActionResult Edit(CorsoViewModel corsoViewModel)
         {
@@ -88,6 +92,8 @@ namespace Week7.Master.MVC.Controllers
         }
 
         //Delete
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator        
+        [HttpGet]
         public IActionResult Delete(string id)
         {
             var corso = BL.GetAllCorsi().FirstOrDefault(c => c.CorsoCodice == id);
@@ -95,6 +101,7 @@ namespace Week7.Master.MVC.Controllers
             return View(corsoViewModel);
         }
 
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator        
         [HttpPost]
         public IActionResult Delete(CorsoViewModel corsoViewModel)
         {

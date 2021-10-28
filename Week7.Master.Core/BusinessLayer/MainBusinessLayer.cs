@@ -15,13 +15,15 @@ namespace Week7.Master.Core.BusinessLayer
         private readonly IStudenteRepository studentiRepo;
         private readonly IDocenteRepository docentiRepo;
         private readonly ILezioneRepository lezioniRepo;
+        private readonly IUtentiRepository utentiRepo;
 
-        public MainBusinessLayer(ICorsoRepository corsi,IStudenteRepository studenti, IDocenteRepository docenti, ILezioneRepository lezioni)
+        public MainBusinessLayer(ICorsoRepository corsi,IStudenteRepository studenti, IDocenteRepository docenti, ILezioneRepository lezioni, IUtentiRepository utenti)
         {
             corsiRepo = corsi;
             studentiRepo = studenti;
             docentiRepo = docenti;
             lezioniRepo = lezioni;
+            utentiRepo = utenti;
         }
 
         public string DeleteByCode(string codiceCorsoDaEliminare)
@@ -281,6 +283,15 @@ namespace Week7.Master.Core.BusinessLayer
             return lezioniCorso;
         }
         #endregion
+
+        public Utente GetAccount(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return null;
+            }
+            return utentiRepo.GetByUsername(username);
+        }
 
     }
 }

@@ -44,5 +44,7 @@ namespace Week7.Master.Core.BusinessLayer
         public List<Lezione> VisualizzaLezioniCorso(string codice);
         public List<Lezione> VisualizzaLezioniCorsoConNome(string nome);
         #endregion
+
+        public Utente GetAccount(string username);
     }
 }

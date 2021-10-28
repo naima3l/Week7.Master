@@ -1,6 +1,10 @@
 ﻿@model List<CorsoViewModel>
 
 <h1>Ecco la lista dei Corsi</h1>
+@if (User.IsInRole("Administrator"))
+{
+    <a class="btn btn-primary" asp-controller="Corsi" asp-action="Create" type="button">Inserisci Nuovo Corso</a>
+}
 
 <a class="btn btn-primary" asp-controller="Corsi" asp-action="Create" type="button">Inserisci nuovo corso</a>
 <table class="table table-striped">
@@ -21,11 +25,14 @@
                 @*<td>@item.Descrizione</td>*@
             <td>
                 <a asp-controller="Corsi" asp-action="Details" asp-route-id="@item.CorsoCodice" class="btn btn-primary">Visualizza Dettagli</a>
-                <a asp-controller="Corsi" asp-action="Edit" asp-route-id="@item.CorsoCodice" class="btn btn-primary">Modifica Corso</a>
-                <a asp-controller="Corsi" asp-action="Delete" asp-route-id="@item.CorsoCodice" class="btn btn-primary">Elimina Corso</a>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <a asp-controller="Corsi" asp-action="Edit" asp-route-id="@item.CorsoCodice" class="btn btn-primary">Modifica</a>
+                    <a asp-controller="Corsi" asp-action="Delete" asp-route-id="@item.CorsoCodice" class="btn btn-danger">Elimina</a>
+                }
             </td>
             </tr>
-        }        
+        }
     </tbody>
     <tfoot>
         <tr>

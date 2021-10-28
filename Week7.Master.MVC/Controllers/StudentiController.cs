@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ using Week7.Master.MVC.Models;
 
 namespace Week7.Master.MVC.Controllers
 {
+    [Authorize(Policy = "Adm")]
     public class StudentiController : Controller
     {
         private readonly IBusinessLayer BL;
@@ -52,7 +55,7 @@ namespace Week7.Master.MVC.Controllers
             if (ModelState.IsValid) //se la validazione è andata a buon fine, aggiungo alla lista e torno alla Index
             {
                 var studente = studenteViewModel.toStudente();
-                studente.CorsoCodice = "C-01";
+                //studente.CorsoCodice = "C-01";
                 BL.AggiungiStudente(studente);
                 return RedirectToAction(nameof(Index)); //qui mi rimandi alla index
             }
@@ -75,7 +78,7 @@ namespace Week7.Master.MVC.Controllers
 
             if (ModelState.IsValid) //se la validazione è andata a buon fine, aggiungo alla lista e torno alla Index
             {
-                BL.ModificaStudente(studenteViewModel.Id, studenteViewModel.Nome, studenteViewModel.Cognome, studenteViewModel.DataNascita, studenteViewModel.TitoloStudio, studenteViewModel.Email, "C-01");
+                BL.ModificaStudente(studenteViewModel.Id, studenteViewModel.Nome, studenteViewModel.Cognome, studenteViewModel.DataNascita, studenteViewModel.TitoloStudio, studenteViewModel.Email, studenteViewModel.CorsoCodice);
                 return RedirectToAction(nameof(Index)); //qui mi rimandi alla index
             }
             return View(studenteViewModel); //se non va a buon fine, ritorno 
@@ -100,6 +103,24 @@ namespace Week7.Master.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(studenteViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteJS(int id)
+        {
+            var messaggio = BL.DeleteStudentById(id);
+            if (messaggio == "Studente eliminato correttamente")
+            {
+                return Json(true);
+            }
+
+            return Json(false);
+        }
+        private void LoadViewBag()
+        {
+            ViewBag.TitoloStudio = new SelectList(new[]{
+                new { Value="D", Text="Diploma"},
+                new { Value="L", Text="Laurea"} }.OrderBy(x => x.Text), "Value", "Text");
         }
     }
 }

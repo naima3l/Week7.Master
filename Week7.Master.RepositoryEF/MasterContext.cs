@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Week7.Master.Core.Entities;
+using Week7.Master.RepositoryEF.Configurations;
 
 namespace Week7.Master.RepositoryEF
 {
@@ -15,11 +16,23 @@ namespace Week7.Master.RepositoryEF
         public DbSet<Studente> Studenti { get; set; }
         public DbSet<Lezione> Lezioni { get; set; }
         public DbSet<Docente> Docenti { get; set; }
+        public DbSet<Utente> Utenti { get; set; }
 
+        public MasterContext()
+        {
+
+        }
+
+
+        public MasterContext(DbContextOptions<MasterContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb; Database=CorsiMaster; Trusted_Connection = True;");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb; Database=CorsiMaster; Trusted_Connection = True;");
+            }
+                
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,6 +41,7 @@ namespace Week7.Master.RepositoryEF
             modelBuilder.ApplyConfiguration<Studente>(new StudenteConfiguration());
             modelBuilder.ApplyConfiguration<Docente>(new DocenteConfiguration());
             modelBuilder.ApplyConfiguration<Lezione>(new LezioneConfiguration());
+            modelBuilder.ApplyConfiguration<Utente>(new UtenteConfiguration());
         }
     }
 }

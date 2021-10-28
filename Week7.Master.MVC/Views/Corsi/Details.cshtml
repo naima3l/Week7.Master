@@ -2,3 +2,28 @@
 
 <h1>Ecco i dettagli del corso @Model.CorsoCodice @Model.Nome : </h1>
 <p>Descrizione : @Model.Descrizione</p>
+
+<p>Di seguito l'elenco degli studenti iscritti al corso</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Cognome</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Studenti)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Cognome</td>
+                @*<td>@item.Descrizione</td>*@
+                <td>
+                    <a asp-controller="Studenti" asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Visualizza dettagli studente</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
